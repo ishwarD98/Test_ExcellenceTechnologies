@@ -1,0 +1,237 @@
+Question 1
+Define an array of numbers (use any random numbers). Write a program to print only the even numbers of the array. Do not use any library functions, need to do via for loops only
+
+ANS :
+import "./styles.css";
+
+var numberArray = [2,4,3,9,7,5,8,0]
+
+export default function App() {
+  return (
+    <div className="App">
+      <h1>Even Numbers : </h1>
+      {
+         numberArray.map(item  => {
+         return item % 2 == 0 ? 
+            <div> {item} </div>  
+          : ""
+      })
+    }
+    </div>
+  );
+}
+ ---------------------------------------------------------------------
+Question 2
+Find the maximum consecutive 1's in an array of 0's and 1's.
+Example:
+a) 00110001001110 - Output :3 [Max num of consecutive 1's is 3]
+b) 1000010001 - Output :1 [Max num of consecutive 1's is 1]
+
+ANS: 
+
+import "./styles.css";
+import React from 'react';
+
+class  App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      num : "No output"
+    }
+  }
+
+  findMaxConsecutiveOnes = (nums) => {
+   nums = [0,0,1,1,0,0,0,1,0,0,1,1,1,0]; //Sample Input
+   let largestCount = 0;
+    let currentCount = 0;
+    for (let i = 0; i<nums.length; i++) {
+        if (nums[i] === 0) {
+            currentCount = 0;
+        } else {
+            currentCount++;
+        };
+        if (currentCount > largestCount) largestCount = currentCount;
+    };
+    this.setState({num : largestCount})
+    return largestCount;
+};
+
+  render(){
+  return (
+    <div className="App">
+      <h1>Maximum consecutive : </h1>
+      <h3>Input = 00110001001110</h3>
+      <button onClick = {this.findMaxConsecutiveOnes}>Get consecutive</button>
+      <h3> Output : {this.state.num} [Max num of consecutive 1's is {this.state.num}]</h3>
+    </div>
+  );
+  }
+}
+
+export default App;
+
+----------------------------------------------------------------------------
+Question 3
+Suppose you have an array of 101 integers. This array is already sorted and all numbers in this array are consecutive. Each number only occurs once in the array except one number which occurs twice. Write a js code to find the repeated number.
+e.g $arr = array(0,1,2,3,4,5,6,7,7,8,9,10...................);
+
+ANS: 
+
+import "./styles.css";
+import React from "react";
+
+const data = [0,1,2,3,4,5,6,7,7,7,7,,9,8,9,9,9,10];
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+  }
+
+  count_duplicate = (a) => {
+    let counts = {};
+    a = data
+    var c = [];
+
+    for (let i = 0; i < a.length; i++) {
+      if (counts[a[i]]) {
+        counts[a[i]] += 1;
+      } else {
+        counts[a[i]] = 1;
+      }
+    }
+    for (let prop in counts) {
+      if (counts[prop] >= 2) {
+        c.push( prop + " Repeated " +counts[prop] + " Times, ")
+        console.log(prop + " counted: " + counts[prop] + " times.");
+      }
+    }
+    this.setState({data : c})
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Find Repeated </h1>
+        <button onClick={this.count_duplicate}>Find Repeated Numbers</button>
+        <h3>{ this.state.data.map (item => {
+             return item
+        })}
+        </h3>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+----------------------------------------------------------------------
+Question 4
+Let’s see we an api url www.example.com/api/get/1 
+Write a sample code to call this rest api and display the result.
+
+
+ANS: 
+
+import "./styles.css";
+import React from 'react';
+
+class  App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      data : "No Data"
+    }
+  }
+
+  callApi = () => {
+    fetch('www.example.com/api/get/1')
+    .then(response => response.json())
+    .then(data => {
+           this.setState({data})
+      });
+};
+
+  render(){
+  return (
+    <div className="App">
+      <h1>API CALL : </h1>
+      <button onClick = {this.callApi}>Click To Call API</button>
+       <h3>Response {this.state.data}</h3>
+    </div>
+  );
+  }
+}
+
+export default App;
+
+  
+ ----------------------------------------------
+Question 5
+Assume there is a object of this format 
+var obj = {
+ “id” : 4, “name” : “abc”,
+ “id” : 10, “name” : “ab2”,
+ “id” : 5, “name” : “abc3”,
+ “id” : 6, “name” : “abc5”
+}
+It can be a dictionary or java object, as per your language of choice. But its key/value pair dictionary simply.
+
+Write a code to sort the object by id 
+I.e final output should have objected sort by id’s
+
+ANS: 
+
+import "./styles.css";
+import React from 'react';
+
+class  App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      data : "No Data"
+    }
+  }
+
+  getSortData = () => {
+    var obj = {
+      id : 4, name : "abc",
+      id : 10, name : "ab2",
+      id : 5, name : "abc3",
+      id : 6, name : "abc5"
+  };
+  var sortable = [];
+  for (var id in obj) {
+      sortable.push([id, id[id]]);
+  }
+  
+  sortable.sort(function(a, b) {
+      return a[1] - b[1];
+  });
+};
+
+  render(){
+  return (
+    <div className="App">
+      <h1>Sort Data </h1>
+      <button onClick = {this.getSortData}>Click To Sort Object</button>
+       <h3>{this.state.data}</h3>
+    </div>
+  );
+  }
+}
+
+export default App;
+
+
+
+  
+  
+  
+  
